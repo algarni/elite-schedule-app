@@ -2,13 +2,15 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpModule } from '@angular/http';
 
 import { MyTeamsPage } from '../pages/my-teams/my-teams.page';
 import { TournamentsPage } from '../pages/tournaments/tournaments.page';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [HttpModule]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
