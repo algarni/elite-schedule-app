@@ -15,6 +15,7 @@ import { StandingsPage } from "../pages/standings/standings.page";
 import { TeamHomePage } from "../pages/team-home/team-home.page";
 
 import { EliteApi } from '../shared/elite-api.service';
+import { GamePage } from "../pages/game/game.page";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EliteApi } from '../shared/elite-api.service';
     TeamsPage,
     TeamDetailPage,
     StandingsPage,
-    TeamHomePage
+    TeamHomePage,
+    GamePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -37,7 +39,8 @@ import { EliteApi } from '../shared/elite-api.service';
     TeamsPage,
     TeamDetailPage,
     StandingsPage,
-    TeamHomePage
+    TeamHomePage,
+    GamePage
   ],
   providers: [
     StatusBar,

@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import * as _ from "lodash";
 
 import { EliteApi } from '../../shared/elite-api.service';
+import { GamePage } from '../game/game.page';
 
 @Component({
     templateUrl: './team-detail.page.html'
@@ -11,7 +12,8 @@ import { EliteApi } from '../../shared/elite-api.service';
 export class TeamDetailPage {
 
     games: any[];
-    team: any;
+    team: any = {};
+    teamStanding: any = {};
     private tourneyData: any;
 
     constructor(
@@ -28,7 +30,7 @@ export class TeamDetailPage {
         this.games = _.chain(this.tourneyData.games)
             .filter(g => g.team1Id === this.team.id || g.team2Id === this.team.id)
             .map(g => {
-                let isTeam1 = (g.teamId === this.team.id);
+                let isTeam1 = (g.team1Id === this.team.id);
                 let opponentName = isTeam1 ? g.team2 : g.team1;
                 let scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
                 return {
@@ -42,18 +44,26 @@ export class TeamDetailPage {
                 };
             })
             .value();
+
+            this.teamStanding = _.find(this.tourneyData.standings, {'teamId': this.team.id});
+            console.log('teamStanding', this.teamStanding);
     }
 
-    getScoreDisplay(isTeam1, team1Score, team2Score){
-        if(teamScore && team2Score){
+    getScoreDisplay(isTeam1, team1Score, team2Score) {
+        if (team1Score && team2Score) {
             var teamScore = (isTeam1 ? team1Score : team2Score);
             var opponentScore = (isTeam1 ? team2Score : team2Score);
-            var winIndicator = teamScore > opponentScore ? "W: ": "L: ";
+            var winIndicator = teamScore > opponentScore ? "W: " : "L: ";
             return winIndicator + teamScore + "-" + opponentScore;
         }
-        else{
+        else {
             return "";
         }
+    }
+
+    gameClicked($event, game) {
+        let sourceGame = this.tourneyData.games.find(g => g.id === game.gameId);
+        this.nav.parent.parent.push(GamePage, sourceGame);
     }
 
 
