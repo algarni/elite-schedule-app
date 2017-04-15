@@ -16,6 +16,8 @@ import { TeamHomePage } from "../pages/team-home/team-home.page";
 
 import { EliteApi } from '../shared/elite-api.service';
 import { GamePage } from "../pages/game/game.page";
+import { IonicStorageModule } from "@ionic/storage";
+import { UserSettings } from "../shared/user-settings.service";
 
 @NgModule({
   declarations: [
@@ -26,10 +28,11 @@ import { GamePage } from "../pages/game/game.page";
     TeamDetailPage,
     StandingsPage,
     TeamHomePage,
-    GamePage
+    GamePage,
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,7 +49,8 @@ import { GamePage } from "../pages/game/game.page";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EliteApi
+    EliteApi,
+    UserSettings
   ]
 })
 export class AppModule {}

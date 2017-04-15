@@ -11,8 +11,13 @@
       <button menuClose ion-item (click)="goHome()">Home</button>
       <button menuClose ion-item (click)="goToTournemants()">Find a Tournaments</button>
     </ion-list>
+    <ion-list>
+      <ion-list-header>Favorites</ion-list-header>
+      <button menuClose ion-item *ngFor="let fav of favoriteTeams" (click)="goToTeam(fav)">
+        {{fav.team.name}}
+        </button>
+    </ion-list>
   </ion-content>
-
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
